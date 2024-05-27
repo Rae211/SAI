@@ -15,5 +15,15 @@ api.add_resource(Task, '/task')
 def index():
     return jsonify({"message": "Task Service is running!"})
 
+app = Flask(__name__)
+
+@app.route('/tasks', methods=['GET', 'POST'])
+def tasks():
+    if request.method == 'POST':
+        task = request.form['task']
+        # 创建任务逻辑
+        return jsonify({"message": "Task created successfully"})
+    return render_template('tasks.html', title='Tasks')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

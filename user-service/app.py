@@ -1,29 +1,24 @@
 from flask import Flask, request, jsonify, render_template
-from flask_restful import Api, Resource
 
 app = Flask(__name__)
-api = Api(app)
 
-class UserRegister(Resource):
-    def post(self):
-        # 处理用户注册
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # 注册逻辑
         return jsonify({"message": "User registered successfully"})
+    return render_template('register.html', title='Register')
 
-class UserLogin(Resource):
-    def post(self):
-        # 处理用户登录
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # 登录逻辑
         return jsonify({"message": "User logged in successfully"})
-
-api.add_resource(UserRegister, '/register')
-api.add_resource(UserLogin, '/login')
-
-@app.route('/')
-def index():
-    return jsonify({"message": "User Service is running!"})
+    return render_template('login.html', title='Login')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-@app.route('/user/profile')
-def profile():
-    # 处理用户个人资料页面的逻辑
-    return render_template('profile.html')

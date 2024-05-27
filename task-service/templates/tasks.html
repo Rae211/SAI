@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Tasks</h2>
+    <form method="POST" action="{{ url_for('create_task') }}">
+        <div class="form-group">
+            <label for="task">Task:</label>
+            <input type="text" class="form-control" id="task" name="task">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Task</button>
+    </form>
+    <ul>
+        <!-- 任务列表 -->
+        <li>No tasks available</li>
+    </ul>
+{% endblock %}
