@@ -22,16 +22,8 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build Docker images
+    - name: Build and push
       run: docker-compose build
-      continue-on-error: true  # 添加这一行
-
-    - name: Debug Docker Compose logs
-      if: failure()
-      run: docker-compose logs  # 添加这一部分以调试日志
-
-    - name: Push Docker images
-      run: docker-compose push
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -45,6 +37,7 @@ jobs:
 
     - name: Run tests
       run: |
+        # Add your test commands here
         python -m unittest discover
 
     - name: SonarQube Scan
