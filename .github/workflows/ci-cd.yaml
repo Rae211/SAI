@@ -30,14 +30,59 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install dependencies
+    - name: Install dependencies for user-service
       run: |
+        cd user-service
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run tests for user-service
       run: |
-        # Add your test commands here
+        cd user-service
+        python -m unittest discover
+
+    - name: Install dependencies for profile-service
+      run: |
+        cd profile-service
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests for profile-service
+      run: |
+        cd profile-service
+        python -m unittest discover
+
+    - name: Install dependencies for messaging-service
+      run: |
+        cd messaging-service
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests for messaging-service
+      run: |
+        cd messaging-service
+        python -m unittest discover
+
+    - name: Install dependencies for notification-service
+      run: |
+        cd notification-service
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests for notification-service
+      run: |
+        cd notification-service
+        python -m unittest discover
+
+    - name: Install dependencies for task-service
+      run: |
+        cd task-service
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests for task-service
+      run: |
+        cd task-service
         python -m unittest discover
 
     - name: SonarQube Scan
