@@ -1,0 +1,45 @@
+version: '3'
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "5000:5000"
+  
+  profile-service:
+    build: ./profile-service
+    ports:
+      - "5005:5000"
+  
+  messaging-service:
+    build: ./messaging-service
+    ports:
+      - "5002:5000"
+
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "5003:5000"
+
+  task-service:
+    build: ./task-service
+    ports:
+      - "5004:5000"
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - user-service
+      - profile-service
+      - messaging-service
+      - notification-service
+      - task-service
